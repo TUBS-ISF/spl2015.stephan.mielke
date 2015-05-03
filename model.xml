@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel chosenLayoutAlgorithm="1">
+		<struct>
+			<or abstract="true" mandatory="true" name="SimpleChat">
+				<and abstract="true" mandatory="true" name="Server">
+					<alt abstract="true" name="Speicher">
+						<feature mandatory="true" name="CSV"/>
+						<feature mandatory="true" name="XML"/>
+						<feature mandatory="true" name="JSON"/>
+						<feature mandatory="true" name="Datenbank"/>
+					</alt>
+					<feature name="Nachrichten  Log"/>
+					<and name="Benutzer Verwalten">
+						<feature name="Friendlist"/>
+					</and>
+					<feature name="Private Nachtichten Offline">
+						<description>
+							Ermöglicht PMs an offline Nutzer
+						</description>
+					</feature>
+					<feature mandatory="true" name="Chatfunktion">
+						<description>
+							Verwaltet Channel (Name, Benutzer in denen versendet die Nachrichten),
+							Verwaltet die online Benutzer (wer ist online und wie heißt er, aber sonst nichts)
+						</description>
+					</feature>
+				</and>
+				<and abstract="true" mandatory="true" name="Client">
+					<and abstract="true" mandatory="true" name="Channel">
+						<feature name="Channel frei wählbar">
+							<description>
+								Channel sind frei wählbar und nicht fest vorgegeben
+							</description>
+						</feature>
+						<alt abstract="true" mandatory="true" name="Verbunden">
+							<feature mandatory="true" name="Mehrfach"/>
+							<feature mandatory="true" name="Einfach"/>
+						</alt>
+					</and>
+					<and abstract="true" mandatory="true" name="Nachrichten">
+						<alt abstract="true" mandatory="true" name="Übertragung">
+							<feature mandatory="true" name="Unverschlüsselt"/>
+							<or abstract="true" mandatory="true" name="Verschlüsselt">
+								<feature mandatory="true" name="Cäsar"/>
+								<feature mandatory="true" name="Vigenere"/>
+								<feature mandatory="true" name="RunningKey"/>
+								<feature mandatory="true" name="IDEA"/>
+								<feature mandatory="true" name="ElGamalCipher"/>
+							</or>
+						</alt>
+						<feature name="Private Nachricht"/>
+						<alt abstract="true" mandatory="true" name="Darstellung">
+							<feature mandatory="true" name="Klartext"/>
+							<feature mandatory="true" name="Formattiert"/>
+						</alt>
+					</and>
+					<and abstract="true" name="Befehle">
+						<description>
+							Commands
+						</description>
+						<feature name="Zeige alle Insassen"/>
+						<feature name="Wechsel Nickname"/>
+						<feature name="Zeige alte Nachrchten"/>
+						<feature name="Poke"/>
+						<feature name="Server Wechseln"/>
+					</and>
+					<feature name="Server frei wählbar">
+						<description>
+							der Server ist fest vorgeschrieben oder wählbar
+						</description>
+					</feature>
+					<alt abstract="true" mandatory="true" name="GUI">
+						<feature mandatory="true" name="Konsole"/>
+						<feature mandatory="true" name="Fenster"/>
+					</alt>
+				</and>
+			</or>
+		</struct>
+		<constraints>
+			<rule>
+				<imp>
+					<var>Benutzer Verwalten</var>
+					<var>Speicher</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Nachrichten  Log</var>
+					<var>Speicher</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Private Nachtichten Offline</var>
+					<conj>
+						<var>Speicher</var>
+						<var>Benutzer Verwalten</var>
+					</conj>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Formattiert</var>
+					<var>Fenster</var>
+				</imp>
+			</rule>
+		</constraints>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>

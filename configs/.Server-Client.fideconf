@@ -1,0 +1,43 @@
+# Lists all features from the model with manual (first digit) and automatic (second digit) selection
+# 0 = deselected, 1 = selected, 2 = undefined
+21SimpleChat
+11Server
+21Speicher
+20CSV
+20XML
+20JSON
+12Datenbank
+12Nachrichten  Log
+22Benutzer Verwalten
+22Friendlist
+22Private Nachtichten Offline
+21Chatfunktion
+11Client
+21Channel
+22Channel frei wählbar
+21Verbunden
+12Mehrfach
+20Einfach
+21Nachrichten
+21Übertragung
+12Unverschlüsselt
+20Verschlüsselt
+20Cäsar
+20Vigenere
+20RunningKey
+20IDEA
+20ElGamalCipher
+22Private Nachricht
+21Darstellung
+12Klartext
+20Formattiert
+21Befehle
+12Zeige alle Insassen
+12Wechsel Nickname
+12Zeige alte Nachrchten
+22Poke
+22Server Wechseln
+22Server frei wählbar
+21GUI
+20Konsole
+12Fenster

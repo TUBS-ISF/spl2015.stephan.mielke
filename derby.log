@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Tue Apr 28 14:08:35 CEST 2015:
+Booten von Derby-Version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): Instanz a816c00e-014c-ffed-c74d-000006ca63b8
+für Datenbankverzeichnis /Users/stephan/IdeaProjects/SimpleChatLP2/chatDB mit Class Loader sun.misc.Launcher$AppClassLoader@4b1210ee
+Geladen aus file:/Users/stephan/IdeaProjects/SimpleChatLP2/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_20-b26
+user.dir=/Users/stephan/IdeaProjects/SimpleChatLP2
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.10.3
+derby.system.home=null
+Datenbank-Class Loader wurde gestartet - derby.database.classpath=''
