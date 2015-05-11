@@ -1,4 +1,4 @@
-package spl.chat;
+package de.tubs.ips.chat;
 
 import org.jetbrains.annotations.NotNull;
 

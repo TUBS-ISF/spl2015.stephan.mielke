@@ -1,4 +1,4 @@
-package spl.chat;
+package de.tubs.ips.chat;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

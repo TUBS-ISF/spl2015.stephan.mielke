@@ -1,7 +1,7 @@
-package spl.chat.server;
+package de.tubs.ips.chat.server;
 
-import spl.chat.Chat;
-import spl.chat.utils.Helper;
+import de.tubs.ips.chat.Chat;
+import de.tubs.ips.chat.utils.Helper;
 
 import java.io.IOException;
 import java.net.InetAddress;

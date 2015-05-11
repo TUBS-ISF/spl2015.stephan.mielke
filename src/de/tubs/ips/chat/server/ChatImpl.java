@@ -1,9 +1,9 @@
-package spl.chat.server;
+package de.tubs.ips.chat.server;
 
+import de.tubs.ips.chat.Chat;
+import de.tubs.ips.chat.ChatListener;
+import de.tubs.ips.chat.ChatMessage;
 import org.jetbrains.annotations.NotNull;
-import spl.chat.Chat;
-import spl.chat.ChatListener;
-import spl.chat.ChatMessage;
 
 import java.rmi.RemoteException;
 import java.sql.*;

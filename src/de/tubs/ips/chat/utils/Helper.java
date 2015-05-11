@@ -1,4 +1,4 @@
-package spl.chat.utils;
+package de.tubs.ips.chat.utils;
 
 
 import java.io.IOException;
