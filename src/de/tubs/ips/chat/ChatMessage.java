@@ -1,4 +1,4 @@
-package spl.chat;
+package de.tubs.ips.chat;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -30,7 +30,6 @@ public class ChatMessage implements Serializable {
     /**
      * Erstellt eine neue Nachricht
      *
-     * @param uid
      * @param message
      */
     public ChatMessage(@NotNull final String channel, @NotNull final String member, @NotNull final String message) {
@@ -40,7 +39,6 @@ public class ChatMessage implements Serializable {
     /**
      * Erstellt eine neue Nachricht
      *
-     * @param uid
      * @param message
      */
     public ChatMessage(@NotNull final String channel, @NotNull final String member, final long time, @NotNull final String message) {
