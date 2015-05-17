@@ -1,14 +1,10 @@
 package de.tubs.ips.chat.client;
 
-import com.beust.jcommander.Parameter;
 import de.tubs.ips.chat.Chat;
 import de.tubs.ips.chat.ChatListener;
 import de.tubs.ips.chat.ChatMessage;
-import de.tubs.ips.chat.utils.Helper;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.nio.file.Paths;
 import java.rmi.NoSuchObjectException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -26,21 +22,21 @@ public class ChatClient implements ChatListener, Serializable, Runnable {
 
     private final List<String> commands;
 
-    protected static final Pattern pExit = Pattern.compile("^(/quit)\\s*$");
-    protected static final Pattern pNick = Pattern.compile("^(/nick)\\s+(\\w+?)\\s*$");
-    protected static final Pattern pJoin = Pattern.compile("^(/join)\\s+(\\w+?)\\s*$");
-    protected static final Pattern pList = Pattern.compile("^(/list)\\s*$");
-    protected static final Pattern pMsg = Pattern.compile("^(/msg)\\s+(\\w+?)\\s+(\\w+?)\\s*$");
-    protected static final Pattern pNames = Pattern.compile("^(/names)\\s+(\\w+?)\\s*$");
-    protected static final Pattern pPart = Pattern.compile("^(/part)\\s+(\\w+?)\\s*$");
-    protected static final Pattern pPost = Pattern.compile("^(/(\\d+))\\s+(.*?)\\s*$");
-    protected static final Pattern pSwitch = Pattern.compile("^(/(\\d+))\\s*$");
+    protected static final Pattern pExit = Pattern.compile("^(/quit)\\s*$", Pattern.CASE_INSENSITIVE);
+    protected static final Pattern pNick = Pattern.compile("^(/nick)\\s+(\\w+?)\\s*$", Pattern.CASE_INSENSITIVE);
+    protected static final Pattern pJoin = Pattern.compile("^(/join)\\s+(\\w+?)\\s*$", Pattern.CASE_INSENSITIVE);
+    protected static final Pattern pList = Pattern.compile("^(/list)\\s*$", Pattern.CASE_INSENSITIVE);
+    protected static final Pattern pMsg = Pattern.compile("^(/msg)\\s+(\\w+?)\\s+(\\w+?)\\s*$", Pattern.CASE_INSENSITIVE);
+    protected static final Pattern pNames = Pattern.compile("^(/names)\\s+(\\w+?)\\s*$", Pattern.CASE_INSENSITIVE);
+    protected static final Pattern pPart = Pattern.compile("^(/part)\\s+(\\w+?)\\s*$", Pattern.CASE_INSENSITIVE);
+    protected static final Pattern pPost = Pattern.compile("^(/(\\d+))\\s+(.*?)\\s*$", Pattern.CASE_INSENSITIVE);
+    protected static final Pattern pSwitch = Pattern.compile("^(/(\\d+))\\s*$", Pattern.CASE_INSENSITIVE);
     protected static final Pattern pHelp = Pattern.compile("^(/help|/\\?)$");
-    protected static final Pattern pGet = Pattern.compile("^(/get)\\s+(\\w+?)\\s+(\\d+)\\s*$");
-    protected static final Pattern pGetAll = Pattern.compile("^(/getall)\\s+(\\w+?)\\s*$");
+    protected static final Pattern pGet = Pattern.compile("^(/get)\\s+(\\w+?)\\s+(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
+    protected static final Pattern pGetAll = Pattern.compile("^(/getall)\\s+(\\w+?)\\s*$", Pattern.CASE_INSENSITIVE);
 
-    protected static final Pattern pConnect = Pattern.compile("^/connect\\s+\"([a-zA-Z0-9\\.]+)\"\\s+(\\d+)\\s*$");
-    protected static final Pattern pDisconnect = Pattern.compile("^/disconnect\\s+\"([a-zA-Z0-9\\.]+)\"\\s+(\\d+)\\s*$");
+    protected static final Pattern pConnect = Pattern.compile("^/connect\\s+\"([a-zA-Z0-9\\.]+)\"\\s+(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
+    protected static final Pattern pDisconnect = Pattern.compile("^/disconnect\\s+\"([a-zA-Z0-9\\.]+)\"\\s+(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
 
     private static final long serialVersionUID = 899243651902242507L;
 
@@ -169,7 +165,24 @@ public class ChatClient implements ChatListener, Serializable, Runnable {
     }
 
     public void privateMessage(ChatMessage message) throws RemoteException {
-        System.out.println("NYI");
+        System.out.printf("zum Verbinden: %s%n", pConnect.pattern());
+        System.out.printf("zum Disconecten: %s%n", pDisconnect.pattern());
+        System.out.printf("zum Beenden: %s%n", pExit.pattern());
+        System.out.printf("zum Betreten eines Channels: %s%n", pJoin.pattern());
+        System.out.printf("zum Verlassen eines Channels: %s%n", pPart.pattern());
+        System.out.printf("zum Channel wechseln: %s%n", pSwitch.pattern());
+        System.out.printf("zum Channel wechseln und schreiben: %s%n", pPost.pattern());
+        if (commands.contains("names")) {
+            System.out.printf("zum Anzeige aller Mitglieder eines Channels: %s%n", pNames.pattern());
+        }
+        if (commands.contains("nick")) {
+            System.out.printf("zum Wechseln des Nicks: %s%n", pNick.pattern());
+        }
+        if (commands.contains("get")) {
+            System.out.printf("zum Holen alter Nachrichten: %s%n", pGet.pattern());
+            System.out.printf("zum Holen alter Nachrichten: %s%n", pGetAll.pattern());
+        }
+
     }
 
     public String getName() throws RemoteException {
@@ -206,7 +219,6 @@ public class ChatClient implements ChatListener, Serializable, Runnable {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(message.getTime());
         String time = calendar.getTime().toString();
-        String shortKey = getShortKey(message.getChannel());
 
         promt(message.getChannel());
 

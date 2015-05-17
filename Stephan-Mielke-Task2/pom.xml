@@ -6,10 +6,14 @@
 
     <groupId>de.tubs.ips.simplechat</groupId>
     <artifactId>simplechat</artifactId>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
+    <name>simplechat</name>
+    <url>https://github.com/TUBS-ISF/spl2015.stephan.mielke</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jdk.version>1.5</jdk.version>
     </properties>
 
     <dependencies>
@@ -31,18 +35,51 @@
     </dependencies>
 
     <build>
+        <finalName>simplechat</finalName>
         <plugins>
+            <!-- download source code in Eclipse, best practice -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.6</version>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.9</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>de.tubs.ips.chat.Launcher</mainClass>
-                        </manifest>
-                    </archive>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>false</downloadJavadocs>
                 </configuration>
+            </plugin>
+
+            <!-- Set a compiler level -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <!-- Run shade goal on package phase -->
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <!-- add Main-Class to manifest file -->
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>de.tubs.ips.chat.Launcher</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

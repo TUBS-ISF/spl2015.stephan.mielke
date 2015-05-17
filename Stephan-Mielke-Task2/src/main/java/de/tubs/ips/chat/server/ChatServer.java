@@ -1,13 +1,9 @@
 package de.tubs.ips.chat.server;
 
-import com.beust.jcommander.Parameter;
 import de.tubs.ips.chat.Chat;
-import de.tubs.ips.chat.utils.Helper;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.nio.file.Paths;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -15,8 +11,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
-import java.util.Properties;
-import java.util.Scanner;
 
 /**
  * @author Stephan
@@ -117,14 +111,19 @@ public class ChatServer implements Runnable {
         }
         System.out.println("server is running");
 
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         do {
-            System.out.println("type \"exit\" for exit");
-        } while (!scanner.nextLine().equals("exit"));
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //System.out.println("type \"exit\" for exit");
+        } while (true); //!scanner.nextLine().equals("exit"));
 
-        scanner.close();
+        //scanner.close();
 
-        try {
+        /*try {
             exit();
         } catch (NotBoundException e) {
             System.err.println("Server error");
@@ -137,5 +136,6 @@ public class ChatServer implements Runnable {
         }
         System.out.println("server shuting down");
         System.exit(0);
+        */
     }
 }
