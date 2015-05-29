@@ -21,7 +21,7 @@ public class Launcher {
     @Parameter(names = {"--server", "-s"}, description = "start server")
     private boolean server = false;
 
-    @Parameter(names = {"--client", "-c"}, description = "start client")
+    @Parameter(names = {"--client", "-c"}, description = "start client", arity = 1)
     private boolean client = true;
 
     @Parameter(names = {"--database", "-db"}, description = "start server with database")

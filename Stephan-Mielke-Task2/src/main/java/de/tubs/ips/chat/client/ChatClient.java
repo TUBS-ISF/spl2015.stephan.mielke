@@ -157,14 +157,6 @@ public class ChatClient implements ChatListener, Serializable, Runnable {
      *
      */
     protected void help() {
-        System.out.println("NYI");
-    }
-
-    public void newMessage(final ChatMessage message) throws RemoteException {
-        printMessage(message);
-    }
-
-    public void privateMessage(ChatMessage message) throws RemoteException {
         System.out.printf("zum Verbinden: %s%n", pConnect.pattern());
         System.out.printf("zum Disconecten: %s%n", pDisconnect.pattern());
         System.out.printf("zum Beenden: %s%n", pExit.pattern());
@@ -182,7 +174,14 @@ public class ChatClient implements ChatListener, Serializable, Runnable {
             System.out.printf("zum Holen alter Nachrichten: %s%n", pGet.pattern());
             System.out.printf("zum Holen alter Nachrichten: %s%n", pGetAll.pattern());
         }
+    }
 
+    public void newMessage(final ChatMessage message) throws RemoteException {
+        printMessage(message);
+    }
+
+    public void privateMessage(ChatMessage message) throws RemoteException {
+        System.out.println("NYI");
     }
 
     public String getName() throws RemoteException {

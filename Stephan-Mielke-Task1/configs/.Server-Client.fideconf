@@ -29,7 +29,7 @@
 20ElGamalCipher
 22Private Nachricht
 21Darstellung
-12Klartext
+11Klartext
 20Formattiert
 21Befehle
 12Zeige alle Insassen
@@ -39,5 +39,5 @@
 22Server Wechseln
 22Server frei wählbar
 21GUI
-20Konsole
-12Fenster
+12Konsole
+20Fenster

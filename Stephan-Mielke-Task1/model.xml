@@ -184,12 +184,6 @@
 			</rule>
 			<rule>
 				<imp>
-					<var>Nachrichten  Log</var>
-					<var>Speicher</var>
-				</imp>
-			</rule>
-			<rule>
-				<imp>
 					<var>Private Nachtichten Offline</var>
 					<conj>
 						<var>Speicher</var>
