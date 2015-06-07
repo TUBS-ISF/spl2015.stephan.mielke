@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="src/test/java"/>
+	<classpathentry including="**/*.java" kind="src" path="src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="M2_REPO/com/intellij/annotations/12.0/annotations-12.0.jar" sourcepath="M2_REPO/com/intellij/annotations/12.0/annotations-12.0-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/Users/stephan/.m2/repository/com/intellij/annotations/12.0/annotations-12.0-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/apache/derby/derby/10.11.1.1/derby-10.11.1.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/beust/jcommander/1.48/jcommander-1.48.jar" sourcepath="M2_REPO/com/beust/jcommander/1.48/jcommander-1.48-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/Users/stephan/.m2/repository/com/beust/jcommander/1.48/jcommander-1.48-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/annotations.jar"/>
+	<classpathentry kind="lib" path="lib/derby.jar"/>
+	<classpathentry kind="lib" path="lib/jcommander-1.48.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
