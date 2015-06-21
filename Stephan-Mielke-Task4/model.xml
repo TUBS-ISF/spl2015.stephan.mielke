@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel chosenLayoutAlgorithm="1">
+		<struct>
+			<or abstract="true" mandatory="true" name="SimpleChat">
+				<and mandatory="true" name="Server">
+					<alt abstract="true" name="Speicher">
+						<feature abstract="true" mandatory="true" name="CSV">
+							<description>
+								Nutzt CSV Dateien als "Datenbank"
+							</description>
+						</feature>
+						<feature abstract="true" mandatory="true" name="XML">
+							<description>
+								Nutzt XML Dateien als "Datenbank"
+							</description>
+						</feature>
+						<feature abstract="true" mandatory="true" name="JSON">
+							<description>
+								Nutzt JSON Dateien als "Datenbank"
+							</description>
+						</feature>
+						<feature mandatory="true" name="Datenbank">
+							<description>
+								Nutzt die Apache Derby Datenbank
+							</description>
+						</feature>
+					</alt>
+					<feature name="Nachrichten_Log">
+						<description>
+							Nachrichten werden auf dem Server mitgelogt und können nachträglich wieder angezeigt werden
+						</description>
+					</feature>
+					<and abstract="true" name="Benutzer_Verwalten">
+						<description>
+							Benutzer werden mit einem Benutzerkonto auf dem Server verwaltet
+						</description>
+						<feature abstract="true" name="Friendlist">
+							<description>
+								Benutzer können andere Benutzer als ihre Freunde eintragen
+							</description>
+						</feature>
+					</and>
+					<feature abstract="true" name="Private_Nachtichten_Offline">
+						<description>
+							Ermöglicht PMs an offline Nutzer
+						</description>
+					</feature>
+				</and>
+				<and mandatory="true" name="Client">
+					<and abstract="true" mandatory="true" name="Channel">
+						<feature name="Channel_frei_waehlbar">
+							<description>
+								Channel sind frei wählbar und nicht fest vorgegeben
+							</description>
+						</feature>
+						<alt abstract="true" mandatory="true" name="Verbunden">
+							<feature abstract="true" mandatory="true" name="Mehrfach">
+								<description>
+									Man kann in mehreren Channeln gleichzeitig aktiv sein
+								</description>
+							</feature>
+							<feature abstract="true" mandatory="true" name="Einfach">
+								<description>
+									Man kann nur in einem Channel aktiv sein
+								</description>
+							</feature>
+						</alt>
+					</and>
+					<and abstract="true" mandatory="true" name="Nachrichten">
+						<alt abstract="true" mandatory="true" name="Uebertragung">
+							<feature abstract="true" mandatory="true" name="Unverschluesselt">
+								<description>
+									Der Nachrichtentext wird unverschlüsselt übertragen sodas jeder im Channel diese lesen kann
+								</description>
+							</feature>
+							<or abstract="true" mandatory="true" name="Verschluesselt">
+								<feature abstract="true" mandatory="true" name="Caesar">
+									<description>
+										Cäsar Chiffre kommt zum Einsatz für die Verschlüsselung
+									</description>
+								</feature>
+								<feature abstract="true" mandatory="true" name="Vigenere">
+									<description>
+										Vigenere Chiffre kommt zum Einsatz für die Verschlüsselung
+									</description>
+								</feature>
+								<feature abstract="true" mandatory="true" name="RunningKey">
+									<description>
+										RunningKey Verfahren kommt zum Einsatz für die Verschlüsselung
+									</description>
+								</feature>
+								<feature abstract="true" mandatory="true" name="IDEA">
+									<description>
+										IDEA Chiffre kommt zum Einsatz für die Verschlüsselung
+									</description>
+								</feature>
+								<feature abstract="true" mandatory="true" name="ElGamalCipher">
+									<description>
+										ElGamal Chiffre kommt zum Einsatz für die Verschlüsselung
+									</description>
+								</feature>
+							</or>
+						</alt>
+						<feature abstract="true" name="Private_Nachricht">
+							<description>
+								Man kann private Nachrichten an andere Personen versenden und empfangen
+							</description>
+						</feature>
+						<alt abstract="true" mandatory="true" name="Darstellung">
+							<feature abstract="true" mandatory="true" name="Klartext">
+								<description>
+									Die Nachrichten bestehen aus einfachem nicht formatiertem Text
+								</description>
+							</feature>
+							<feature abstract="true" mandatory="true" name="Formattiert">
+								<description>
+									Nachrichten können Formatiereungen durch BB oder HTML Tags enthalten
+								</description>
+							</feature>
+						</alt>
+					</and>
+					<and abstract="true" name="Befehle">
+						<description>
+							Commands
+						</description>
+						<feature name="Zeige_alle_Insassen">
+							<description>
+								Es wird unterstützt alle Personen in einem Channel anzuzeigen
+							</description>
+						</feature>
+						<feature name="Wechsel_Nickname">
+							<description>
+								Es wird unterstützt den eigenen Nick zu verändern (nur nach noch nicht vergebene)
+							</description>
+						</feature>
+						<feature name="Zeige_alte_Nachrchten">
+							<description>
+								Es können alte Nachrichten für den jeweiligen Channel vom Server abgerufen werden
+							</description>
+						</feature>
+						<feature abstract="true" name="Poke">
+							<description>
+								Andere Personen im Channel können "Angestupst" werden um diese auf etwas aufmerksam zu machen
+							</description>
+						</feature>
+						<feature name="Server_Wechseln">
+							<description>
+								Server kann gewechselt werden ohne den Clienten neuzustarten
+							</description>
+						</feature>
+					</and>
+					<feature abstract="true" name="Server_frei_waehlbar">
+						<description>
+							der Server ist fest vorgeschrieben oder wählbar
+						</description>
+					</feature>
+					<alt abstract="true" mandatory="true" name="GUI">
+						<feature abstract="true" mandatory="true" name="Konsole">
+							<description>
+								Darstellung erfolgt im Konsolenfenster
+							</description>
+						</feature>
+						<feature abstract="true" mandatory="true" name="Fenster">
+							<description>
+								Darstellung erfolgt in einenen Fesntern (GUI halt)
+							</description>
+						</feature>
+					</alt>
+				</and>
+				<feature mandatory="true" name="Debug_Mode">
+					<description>
+						mit Debug Ausgaben
+						
+					</description>
+				</feature>
+			</or>
+		</struct>
+		<constraints>
+			<rule>
+				<imp>
+					<var>Benutzer_Verwalten</var>
+					<var>Speicher</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Private_Nachtichten_Offline</var>
+					<conj>
+						<var>Speicher</var>
+						<var>Benutzer_Verwalten</var>
+					</conj>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Formattiert</var>
+					<var>Fenster</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Server_Wechseln</var>
+					<var>Server_frei_waehlbar</var>
+				</imp>
+			</rule>
+			<rule>
+				<disj>
+					<var>Client</var>
+					<var>Server</var>
+				</disj>
+			</rule>
+		</constraints>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>
