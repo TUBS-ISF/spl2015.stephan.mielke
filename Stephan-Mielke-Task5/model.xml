@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 	<featureModel chosenLayoutAlgorithm="1">
 		<struct>
-			<or abstract="true" mandatory="true" name="SimpleChat">
+			<or mandatory="true" name="SimpleChat">
 				<and mandatory="true" name="Server">
 					<alt abstract="true" name="Speicher">
 						<feature abstract="true" mandatory="true" name="CSV">
@@ -170,7 +170,6 @@
 				<feature mandatory="true" name="Debug_Mode">
 					<description>
 						mit Debug Ausgaben
-						
 					</description>
 				</feature>
 			</or>
