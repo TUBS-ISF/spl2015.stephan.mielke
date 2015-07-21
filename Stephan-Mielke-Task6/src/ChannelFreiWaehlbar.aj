@@ -1,63 +1,57 @@
-package de.tubs.ips.chat.client;
-
-import de.tubs.ips.chat.ChatListener;
-
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @author Stephan
- */
-public class ChatClient implements ChatListener, Serializable, Runnable {
 
-    private static final Pattern pJoin = Pattern.compile(
+public aspect ChannelFreiWaehlbar {
+
+    public Pattern Client.ChatClient.pJoin = Pattern.compile(
         "^(/join)\\s+(\\w+?)\\s*$", Pattern.CASE_INSENSITIVE);
-    private static final Pattern pPart = Pattern.compile(
+    public Pattern Client.ChatClient.pPart = Pattern.compile(
         "^(/part)\\s+(\\w+?)\\s*$", Pattern.CASE_INSENSITIVE);
-    private static final Pattern pSwitch = Pattern.compile("^(/(\\d+))\\s*$",
+    public Pattern Client.ChatClient.pSwitch = Pattern.compile("^(/(\\d+))\\s*$",
         Pattern.CASE_INSENSITIVE);
-    private static final Pattern pPost = Pattern.compile(
+    public Pattern Client.ChatClient.pPost = Pattern.compile(
         "^(/(\\d+))\\s+(.*?)\\s*$", Pattern.CASE_INSENSITIVE);
 
-    protected void help() {
-        original();
-        System.out.printf("zum Betreten eines Channels: %s%n",
-            pJoin.pattern());
-        System.out.printf("zum Verlassen eines Channels: %s%n",
-            pPart.pattern());
-        System.out.printf("zum Channel wechseln: %s%n", pSwitch.pattern());
-        System.out.printf("zum Channel wechseln und schreiben: %s%n",
-            pPost.pattern());
+    pointcut helpMethod(): execution(public void Client.ChatClient.help()) && this(Client.ChatClient);
+
+    after(): helpMethod() {
+        Client.ChatClient t = (Client.ChatClient) thisJoinPoint.getThis();
+        System.out.printf("zum Verbinden: %s%n", t.pConnect.pattern());
+        System.out.printf("zum Disconecten: %s%n", t.pDisconnect.pattern());
     }
 
-    private boolean checkInput(String input) {
-        if (original(input)) {
+    pointcut checkInputMethod(String input): execution(private boolean Client.ChatClient.checkInput(String)) && args(input) && target(Client.ChatClient);
+
+    boolean around(String input): checkInputMethod(input) {
+        Client.ChatClient t = (Client.ChatClient) thisJoinPoint.getThis();
+
+        if (proceed(input)) {
             return true;
         }
 
         Matcher matcher;
-        if ((matcher = pJoin.matcher(input)) != null && matcher.matches()) {
-            join(matcher);
+        if ((matcher = t.pJoin.matcher(input)) != null && matcher.matches()) {
+            t.join(matcher);
             return true;
-        } else if ((matcher = pPart.matcher(input)) != null
+        } else if ((matcher = t.pPart.matcher(input)) != null
             && matcher.matches()) {
-            part(matcher);
+            t.part(matcher);
             return true;
-        } else if ((matcher = pSwitch.matcher(input)) != null
+        } else if ((matcher = t.pSwitch.matcher(input)) != null
             && matcher.matches()) {
-            switchActiveChannel(matcher);
+            t.switchActiveChannel(matcher);
             return true;
-        } else if ((matcher = pPost.matcher(input)) != null
+        } else if ((matcher = t.pPost.matcher(input)) != null
             && matcher.matches()) {
-            post(matcher);
+            t.post(matcher);
             return true;
         }
         return false;
     }
 
-    private void post(Matcher matcher) {
+    private void Client.ChatClient.post(Matcher matcher) {
         if (!switchActiveChannel(matcher)) {
             return;
         }
@@ -66,7 +60,7 @@ public class ChatClient implements ChatListener, Serializable, Runnable {
         post(input);
     }
 
-    private void part(Matcher matcher) {
+    private void Client.ChatClient.part(Matcher matcher) {
         String channelName = matcher.group(2);
         if (!getChannels().values().contains(channelName)) {
             System.out
@@ -101,7 +95,7 @@ public class ChatClient implements ChatListener, Serializable, Runnable {
             channelName);
     }
 
-    private void join(Matcher matcher) {
+    private void Client.ChatClient.join(Matcher matcher) {
         String channelName = matcher.group(2);
 
         if (getChannels().values().contains(channelName)) {
@@ -131,17 +125,17 @@ public class ChatClient implements ChatListener, Serializable, Runnable {
             // #endif
         }
     }
-    
-    private boolean switchActiveChannel(Matcher matcher) {
-		String c = channels.get(matcher.group(2));
 
-		if (c == null) {
-			System.out.printf("Der Shortkey \"%s\" ist nicht belegt",
-					matcher.group(2));
-			return false;
-		}
+    private boolean Client.ChatClient.switchActiveChannel(Matcher matcher) {
+        String c = channels.get(matcher.group(2));
 
-		channel = c;
-		return true;
-	}
+        if (c == null) {
+            System.out.printf("Der Shortkey \"%s\" ist nicht belegt",
+                matcher.group(2));
+            return false;
+        }
+
+        channel = c;
+        return true;
+    }
 }
